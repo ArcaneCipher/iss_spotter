@@ -24,7 +24,10 @@ const fetchMyIP = function (callback) {
       return;
     }
 
-    const ip = body.ip;
+    const ip = null;
+    if (body.ip === true) {
+      ip = body.ip;
+    };
 
     // Ensure the body has at least one result
     if (ip) {
