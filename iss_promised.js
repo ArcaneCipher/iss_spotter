@@ -86,10 +86,24 @@ const fetchISSFlyOverTimes = function (coords) {
  * Input: None
  * Returns: Promise for fly over data for users location
  */
-const nextISSTimesForMyLocation = function () {
+// Using async version
+const nextISSTimesForMyLocation = async function() {
+  try {
+    const ip = await fetchMyIP();
+    const coords = await fetchCoordsByIP(ip);
+    const passTimes = await fetchISSFlyOverTimes(coords);
+    return passTimes;
+  } catch (error) {
+    throw error;
+  }
+};
+
+
+
+/* const nextISSTimesForMyLocation = function () {
   return fetchMyIP()
     .then((ip) => fetchCoordsByIP(ip))
     .then((coords) => fetchISSFlyOverTimes(coords))
-};
+}; */
 
 module.exports = { nextISSTimesForMyLocation };
